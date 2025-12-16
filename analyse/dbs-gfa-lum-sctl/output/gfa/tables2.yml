@@ -1,0 +1,22 @@
+acteurs:
+  - Personnes
+
+activite:
+  - Actes
+  - NewActes
+  - Gfa
+  - Mouvements
+  - NewMouvements
+  - NumeroParts
+  - NewNumeroParts
+  - LiensActionPersMorale
+
+geo:
+
+config:
+  - Configuration
+  - couleurs
+  - Libelle
+  - Tmp
+  - TableTemp
+  - TableLog

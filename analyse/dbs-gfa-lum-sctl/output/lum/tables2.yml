@@ -1,0 +1,21 @@
+acteurs:
+  - Utilisateurs
+  - Actionnaires
+
+activite:
+  - MontantInterets
+  - NumeroParts
+  - Mouvements
+  - CodesAG
+
+geo:
+
+config:
+  - Civilites
+  - Colleges
+  - Configuration
+  - CorNbPartLibelle
+  - couleurs
+  - Interets
+  - MontantDesParts
+  - CorMontantLibelle

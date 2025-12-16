@@ -1,0 +1,14 @@
+Actionnaires
+Civilites
+Colleges
+Configuration
+CorNbPartLibelle
+couleurs
+Interets
+MontantDesParts
+MontantInterets
+NumeroParts
+Utilisateurs
+CorMontantLibelle
+Mouvements
+CodesAG

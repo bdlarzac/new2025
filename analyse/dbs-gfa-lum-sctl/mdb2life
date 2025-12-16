@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Exporte les données des mdb de Claude
+
+dbs="
+    gfa
+    lum
+    sctl
+"
+
+dumptables=true
+
+for db in $dbs; do
+    echo "Processing $db"
+    input_file=input/mdb-claude/$db.mdb
+    output_dir=output/$db
+    mkdir -p $output_dir
+    mdb-tables --single-column $input_file > $output_dir/tables.txt
+    mdb-schema $input_file > $output_dir/schema.txt
+    if [ "$dumptables" = true ]; then
+        data_dir=$output_dir/data
+        mkdir -p $data_dir
+        mapfile -t tables < $output_dir/tables.txt
+        for table in "${tables[@]}"; do
+            echo "    $table"
+            mdb-export --delimiter ";" --no-quote $input_file $table > $data_dir/$table.csv
+        done
+    fi
+done

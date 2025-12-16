@@ -1,0 +1,258 @@
+-- ----------------------------------------------------------
+-- MDB Tools - A library for reading MS Access database files
+-- Copyright (C) 2000-2011 Brian Bruns and others.
+-- Files in libmdb are licensed under LGPL and the utilities under
+-- the GPL, see COPYING.LIB and COPYING files respectively.
+-- Check out http://mdbtools.sourceforge.net
+-- ----------------------------------------------------------
+
+-- That file uses encoding UTF-8
+
+CREATE TABLE [Actes]
+ (
+	[IdActe]			Long Integer, 
+	[Date]			DateTime, 
+	[IdGfa]			Long Integer, 
+	[Mouvement]			Boolean NOT NULL, 
+	[NbPartsEnregistrees]			Long Integer, 
+	[Marque]			Byte, 
+	[Definitif]			Boolean NOT NULL, 
+	[Code]			Text (15), 
+	[Commentaire]			Text (100)
+);
+
+CREATE TABLE [Configuration]
+ (
+	[IdConfig]			Long Integer, 
+	[LettresActesProvi]			Text (50), 
+	[ConfirmationSuppression]			Boolean NOT NULL, 
+	[LettresCessionParts]			Text (20), 
+	[LettresAnnulParts]			Text (20), 
+	[MajEffectuee]			Boolean NOT NULL, 
+	[NewLettreActeProvi]			Text (50), 
+	[NewLettreAnnulPart]			Text (50), 
+	[NewLettreCessionPart]			Text (50)
+);
+
+CREATE TABLE [Gfa]
+ (
+	[idGfa]			Long Integer, 
+	[TITRE]			Text (1), 
+	[NOM]			Text (40), 
+	[ADRESSE]			Text (45), 
+	[ADRESSE2]			Text (30), 
+	[CODPOST]			Text (2), 
+	[CODVILLE]			Text (3), 
+	[VILLE]			Text (30), 
+	[Q1]			Text (1), 
+	[REPQ1]			Text (5), 
+	[ANC_ADR]			Text (50), 
+	[Q2]			Text (1), 
+	[REPQ2]			Text (12), 
+	[MOUV_PARTS]			Text (50), 
+	[GFA1]			Double, 
+	[GFA2]			Double, 
+	[GFA3]			Double, 
+	[GFA4]			Double, 
+	[CODE]			Text (5), 
+	[A_NOM]			Text (40), 
+	[A_CODPOST]			Text (2), 
+	[A_CODVILLE]			Text (3), 
+	[A_VILLE]			Text (30), 
+	[A_TITRE]			Text (1)
+);
+
+CREATE TABLE [Libelle]
+ (
+	[IdLibelle]			Long Integer, 
+	[Libelle]			Text (30), 
+	[TypeLibelle]			Long Integer, 
+	[Marque]			Byte, 
+	[Couleur]			Long Integer
+);
+
+CREATE TABLE [Mouvements]
+ (
+	[IdMouvement]			Long Integer, 
+	[IdPersonne]			Long Integer, 
+	[IdActe]			Long Integer, 
+	[IdGfa]			Long Integer, 
+	[NbParts]			Long Integer, 
+	[Mouvement]			Boolean NOT NULL, 
+	[IdTypeApport]			Long Integer, 
+	[DateMvt]			DateTime, 
+	[IdTypeRembourse]			Long Integer
+);
+
+CREATE TABLE [Personnes]
+ (
+	[IdPersonne]			Long Integer, 
+	[IdCivilite]			Long Integer, 
+	[Nom]			Text (100), 
+	[Prenom]			Text (30), 
+	[Adresse]			Text (50), 
+	[CodePostal]			Text (50), 
+	[Ville]			Text (50), 
+	[Tel]			Text (50), 
+	[Fax]			Text (50), 
+	[IdCivilite_Acte]			Long Integer, 
+	[Nom_Acte]			Text (100), 
+	[Prenom_Acte]			Text (30), 
+	[Adresse_Acte]			Text (50), 
+	[CodePostal_Acte]			Text (50), 
+	[Ville_Acte]			Text (50), 
+	[Npai]			Boolean NOT NULL, 
+	[Fini]			Boolean NOT NULL, 
+	[Decede]			Boolean NOT NULL, 
+	[ApportTerre]			Boolean NOT NULL, 
+	[Adresse2]			Text (50), 
+	[PasconvocAG]			Boolean NOT NULL, 
+	[DateNaissance]			DateTime, 
+	[Commentaire]			Memo/Hyperlink (255), 
+	[CR]			Boolean NOT NULL, 
+	[Rapport]			Boolean NOT NULL, 
+	[CNIFournie]			Boolean NOT NULL, 
+	[Fondateur]			Boolean NOT NULL, 
+	[DeDroit]			Boolean NOT NULL, 
+	[Adherent]			Boolean NOT NULL, 
+	[Mail]			Text (255), 
+	[MisOffice]			Boolean NOT NULL, 
+	[PasConvocAGTsl]			Boolean NOT NULL, 
+	[personnemorale]			Boolean NOT NULL, 
+	[dcdnotarie]			Boolean NOT NULL, 
+	[IdPersMorale]			Long Integer, 
+	[EstPersonneMorale]			Boolean NOT NULL, 
+	[Couleur]			Long Integer, 
+	[EstFicheAnnulation]			Boolean NOT NULL
+);
+
+CREATE TABLE [Tmp]
+ (
+	[C1]			Text (50), 
+	[C2]			Text (50)
+);
+
+CREATE TABLE [NumeroParts]
+ (
+	[IdNumeroPart]			Long Integer, 
+	[IdMouvement]			Long Integer, 
+	[NumeroPart]			Long Integer, 
+	[IdPersonne]			Long Integer, 
+	[DateMvt]			DateTime, 
+	[Termine]			Boolean NOT NULL, 
+	[Distribue]			Boolean NOT NULL, 
+	[Etat]			Long Integer, 
+	[IdGfa]			Long Integer, 
+	[IdTSLouAssoc]			Long Integer, 
+	[DejaAttribue]			Boolean NOT NULL, 
+	[NumeroPartGfa]			Long Integer, 
+	[NewNumeroPart]			Long Integer, 
+	[IdPersMorale]			Long Integer
+);
+
+CREATE TABLE [TableLog]
+ (
+	[IdTrace]			Long Integer, 
+	[IdMvt]			Text (20), 
+	[IdPersonne]			Text (20), 
+	[IdGfa]			Text (20), 
+	[NbParts]			Text (20), 
+	[DateActe]			Text (30), 
+	[CodeActe]			Text (20), 
+	[NomPrenom]			Text (128)
+);
+
+CREATE TABLE [couleurs]
+ (
+	[idcouleur]			Long Integer, 
+	[couleur1]			Long Integer, 
+	[couleur2]			Long Integer, 
+	[couleur3]			Long Integer, 
+	[couleur4]			Long Integer, 
+	[couleur5]			Long Integer, 
+	[couleur6]			Long Integer, 
+	[couleur7]			Long Integer, 
+	[couleur8]			Long Integer, 
+	[couleur9]			Long Integer, 
+	[couleur10]			Long Integer
+);
+
+CREATE TABLE [TableTemp]
+ (
+	[IdPersonne]			Long Integer, 
+	[GFAP1]			Text (255), 
+	[GFAP2]			Text (255), 
+	[GFAP3]			Text (255), 
+	[GFAP4]			Text (255), 
+	[TotalParts]			Text (255), 
+	[IdCivilite]			Long Integer, 
+	[Nom]			Text (100), 
+	[Prenom]			Text (30), 
+	[Adresse]			Text (50), 
+	[Adresse2]			Text (50), 
+	[CodePostal]			Text (50), 
+	[Ville]			Text (50), 
+	[Tel]			Text (50), 
+	[Fax]			Text (50), 
+	[Npai]			Boolean NOT NULL, 
+	[Fini]			Boolean NOT NULL, 
+	[Decede]			Boolean NOT NULL, 
+	[PasConvocAG]			Boolean NOT NULL, 
+	[Libelle]			Text (30), 
+	[LstCodeActe]			Text (255), 
+	[NumParts1]			Text (255)
+);
+
+CREATE TABLE [LiensActionPersMorale]
+ (
+	[IdLien]			Long Integer, 
+	[IdActionnaire]			Long Integer, 
+	[IdPersmorale]			Long Integer
+);
+
+CREATE TABLE [NewMouvements]
+ (
+	[IdMouvement]			Long Integer, 
+	[IdPersonne]			Long Integer, 
+	[IdActe]			Long Integer, 
+	[IdGfa]			Long Integer, 
+	[NbParts]			Long Integer, 
+	[Mouvement]			Boolean NOT NULL, 
+	[IdTypeApport]			Long Integer, 
+	[DateMvt]			DateTime, 
+	[IdTypeRembourse]			Long Integer
+);
+
+CREATE TABLE [NewActes]
+ (
+	[IdActe]			Long Integer, 
+	[Date]			DateTime, 
+	[IdGfa]			Long Integer, 
+	[Mouvement]			Boolean NOT NULL, 
+	[NbPartsEnregistrees]			Long Integer, 
+	[Commentaire]			Text (100), 
+	[Code]			Text (15), 
+	[Marque]			Byte, 
+	[Definitif]			Boolean NOT NULL
+);
+
+CREATE TABLE [NewNumeroParts]
+ (
+	[IdNumeroPart]			Long Integer, 
+	[IdMouvement]			Long Integer, 
+	[NumeroPart]			Long Integer, 
+	[IdPersonne]			Long Integer, 
+	[DateMvt]			DateTime, 
+	[Termine]			Boolean NOT NULL, 
+	[Distribue]			Boolean NOT NULL, 
+	[Etat]			Long Integer, 
+	[IdGfa]			Long Integer, 
+	[IdTSLouAssoc]			Long Integer, 
+	[DejaAttribue]			Boolean NOT NULL, 
+	[NumeroPartGfa]			Long Integer, 
+	[NewNumeroPart]			Long Integer, 
+	[IdPersMorale]			Long Integer, 
+	[OldNumeroPart]			Long Integer
+);
+
+

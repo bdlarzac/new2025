@@ -1,0 +1,21 @@
+
+analyse/dbs-gfa-lum-sctl/input/
+
+analyse/dbs-gfa-lum-sctl/output/*/data/
+
+#
+# convention, files for local usage only
+#
+z.*
+y.*
+1.*
+
+#
+# editor and temporary stuff
+#
+*.exe
+.~*
+*.bkp
+*.dtmp
+*.vim
+*.code-workspace

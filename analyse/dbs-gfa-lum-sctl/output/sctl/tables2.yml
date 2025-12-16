@@ -1,0 +1,27 @@
+acteurs:
+  - Exploita
+
+activite:
+  - Fermage
+  - NumGfa
+  - Recad
+  - ValeurPointGFA
+  - ValeurPointSCTL
+  - Coef
+  - PSG
+
+geo:
+  - Commune
+  - LieuDit
+  - Parcelle
+  - ParcelleSup
+  - Subdivision
+  - TypeCadastre
+  - ClassCadastre
+  - SubdivCadastre
+  - CadValeur
+
+config:
+  - ForPrintSctl
+  - Options
+  - Config

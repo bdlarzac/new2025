@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Export mdb Larzac</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="license" href="http://www.gnu.org/copyleft/gpl.html">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2025-12-15">
+    <style>
+body{
+    font-family:"roboto flex",sans-serif;
+}
+pre{
+    display:table;
+    white-space:pre-wrap;
+    margin:1rem;
+    background:lightgrey;
+    padding:.5rem;
+    border-radius:2px;
+    border:1px solid #717a9f;
+    line-height:1.15;
+}
+code{
+    background:lightgrey;
+    padding:2px 4px;
+}
+    </style>
+</head>
+
+<body>
+<h1>Export mdb Larzac</h1>
+
+<!-- ********************************************************************************* -->
+<h2>mdbtools</h2>
+Pour manipuler des fichiers mdb sous linux :
+<pre>
+sudo apt install mdbtools
+</pre>
+Donne accès aux commandes suivantes :
+<pre>
+mdb-tables      list tables in the specified file
+mdb-schema      generate schema DDL for the specified file
+mdb-export      generate CSV style output for a table
+mdb-ver         display the version of the specified file
+mdb-header      support for using MDB data in C
+mdb-parsecsv    support for using MDB data in C
+mdb-sql         command line SQL query tool
+</pre>
+
+Pour connaître les options possibles, par exemple :
+<pre>
+man mdb-tables
+</pre>
+
+<!-- ********************************************************************************* -->
+<h2>Préparation des données</h2>
+
+Dans <code>bdl-sctl-claude/claude-DisqueE/README-thierry.txt</code> :
+<pre>
+Logiciel 1 : logiciel de parts (GFA)
+-------------------------------------
+DisqueE/Sctl/NewTSL.exe
+DisqueE/Sctl/Bases/TSL.mdb
+Alias ODBC : TerreSolidaireLarzac
+mysql : sctl_1TSL
+
+Logiciel 2 : Gestion des parcelles (SCTL)
+-------------------------------------                                                                                                                   
+DisqueE/D3Dev/Ghis/Sctl2.exe
+DisqueE/D3Dev/Ghis/Base/Sctl-Gfa.mdb
+Alias ODBC : Sctl
+mysql : sctl_2GFA
+
+Logiciel 3 : Lum del Larzac
+-------------------------------------
+DisqueE/D3Dev/LumDelLarzac/LumDelLarzac.exe
+DisqueE/D3Dev/LumDelLarzac/Base/LumDelLarzac.mdb
+Alias ODBC : LumDelLarzac
+mysql : sctl_3LUM
+</pre>
+
+On créé un répertoire de travail et on récupère les données :
+<pre>
+mkdir dbs-gfa+lum+sctl
+cd dbs-gfa+lum+sctl
+mkdir -p input/mdb-claude
+cp bdl-sctl-claude/claude-DisqueE/Sctl/Bases/TSL.mdb                        input/mdb-claude/gfa.mdb
+cp bdl-sctl-claude/claude-DisqueE/D3Dev/Ghis/Base/Sctl-Gfa.mdb              input/mdb-claude/sctl.mdb
+cp bdl-sctl-claude/claude-DisqueE/D3Dev/LumDelLarzac/Base/LumDelLarzac.mdb  input/mdb-claude/lum.mdb 
+</pre>
+
+<!-- ********************************************************************************* -->
+<h2>Export</h2>
+
+Toujours depuis le répertoire <code>dbs-gfa+lum+sctl</code>, on exporte en utilisant le script <code>mdb2life</code>:
+<pre>
+./mdb2life
+</pre>
+
+Ce qui donne cette hiérarchie :
+<pre>
+dbs-gfa+lum+sctl
+    ├── index.html
+    ├── input
+    │   └── mdb-claude
+    │       ├── gfa.mdb
+    │       ├── lum.mdb
+    │       └── sctl.mdb
+    ├── mdb2life
+    └── output
+        ├── gfa
+        │   ├── data
+        │   │   ├── Actes.csv
+        │   │   ├── Configuration.csv
+        │   │   ├── couleurs.csv
+        │   │   ├── Gfa.csv
+        │   │   ├── Libelle.csv
+        │   │   ├── LiensActionPersMorale.csv
+        │   │   ├── Mouvements.csv
+        │   │   ├── NewActes.csv
+        │   │   ├── NewMouvements.csv
+        │   │   ├── NewNumeroParts.csv
+        │   │   ├── NumeroParts.csv
+        │   │   ├── Personnes.csv
+        │   │   ├── TableLog.csv
+        │   │   ├── TableTemp.csv
+        │   │   └── Tmp.csv
+        │   ├── schema.txt
+        │   └── tables.txt
+        ├── lum
+        │   ├── data
+        │   │   ├── Actionnaires.csv
+        │   │   ├── Civilites.csv
+        │   │   ├── CodesAG.csv
+        │   │   ├── Colleges.csv
+        │   │   ├── Configuration.csv
+        │   │   ├── CorMontantLibelle.csv
+        │   │   ├── CorNbPartLibelle.csv
+        │   │   ├── couleurs.csv
+        │   │   ├── Interets.csv
+        │   │   ├── MontantDesParts.csv
+        │   │   ├── MontantInterets.csv
+        │   │   ├── Mouvements.csv
+        │   │   ├── NumeroParts.csv
+        │   │   └── Utilisateurs.csv
+        │   ├── schema.txt
+        │   └── tables.txt
+        └── sctl
+            ├── data
+            │   ├── CadValeur.csv
+            │   ├── ClassCadastre.csv
+            │   ├── Coef.csv
+            │   ├── Commune.csv
+            │   ├── Config.csv
+            │   ├── Exploita.csv
+            │   ├── Fermage.csv
+            │   ├── ForPrintSctl.csv
+            │   ├── LieuDit.csv
+            │   ├── NumGfa.csv
+            │   ├── Options.csv
+            │   ├── Parcelle.csv
+            │   ├── ParcelleSup.csv
+            │   ├── PSG.csv
+            │   ├── Recad.csv
+            │   ├── SubdivCadastre.csv
+            │   ├── Subdivision.csv
+            │   ├── TypeCadastre.csv
+            │   ├── ValeurPointGFA.csv
+            │   └── ValeurPointSCTL.csv
+            ├── schema.txt
+            └── tables.txt
+</pre>
+
+</body>
+</html>
+

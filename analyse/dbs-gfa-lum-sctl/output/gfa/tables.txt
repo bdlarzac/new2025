@@ -1,0 +1,15 @@
+Actes
+Configuration
+Gfa
+Libelle
+Mouvements
+Personnes
+Tmp
+NumeroParts
+TableLog
+couleurs
+TableTemp
+LiensActionPersMorale
+NewMouvements
+NewActes
+NewNumeroParts

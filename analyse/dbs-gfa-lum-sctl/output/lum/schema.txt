@@ -1,0 +1,191 @@
+-- ----------------------------------------------------------
+-- MDB Tools - A library for reading MS Access database files
+-- Copyright (C) 2000-2011 Brian Bruns and others.
+-- Files in libmdb are licensed under LGPL and the utilities under
+-- the GPL, see COPYING.LIB and COPYING files respectively.
+-- Check out http://mdbtools.sourceforge.net
+-- ----------------------------------------------------------
+
+-- That file uses encoding UTF-8
+
+CREATE TABLE [Actionnaires]
+ (
+	[IdActionnaire]			Long Integer, 
+	[IdCivilite]			Long Integer, 
+	[Nom]			Text (100), 
+	[NomJeuneFille]			Text (50), 
+	[Prenom]			Text (30), 
+	[Adresse]			Text (50), 
+	[Adresse2]			Text (50), 
+	[CodePostal]			Text (50), 
+	[Ville]			Text (50), 
+	[Tel]			Text (50), 
+	[Portable]			Text (50), 
+	[Npai]			Boolean NOT NULL, 
+	[Commentaire]			Memo/Hyperlink (255), 
+	[Decede]			Boolean NOT NULL, 
+	[DateNaissance]			DateTime, 
+	[Mail]			Text (255), 
+	[Couleur]			Long Integer, 
+	[IdCollege]			Long Integer, 
+	[LieuNaissance]			Text (128), 
+	[SituationFamille]			Integer, 
+	[DateSituation]			DateTime, 
+	[Nationalite]			Text (50), 
+	[Profession]			Text (50), 
+	[EstPersonneMorale]			Boolean NOT NULL, 
+	[BulletinRecu]			Boolean NOT NULL
+);
+
+CREATE TABLE [Civilites]
+ (
+	[IdCivilite]			Long Integer, 
+	[Libelle]			Text (50)
+);
+
+CREATE TABLE [Colleges]
+ (
+	[IdCollege]			Long Integer, 
+	[Description]			Text (128), 
+	[Couleur]			Long Integer
+);
+
+CREATE TABLE [Configuration]
+ (
+	[IdConfig]			Long Integer, 
+	[Structure]			Text (128), 
+	[Adresse]			Text (128), 
+	[CodePostal]			Text (20), 
+	[Ville]			Text (50), 
+	[Telephone]			Text (20), 
+	[Fax]			Text (20), 
+	[Siret]			Text (20), 
+	[Mail]			Text (128), 
+	[IdParam]			Long Integer
+);
+
+CREATE TABLE [CorNbPartLibelle]
+ (
+	[IdCorNumPartLibelle]			Long Integer, 
+	[Nombre]			Long Integer, 
+	[Libelle]			Text (50)
+);
+
+CREATE TABLE [couleurs]
+ (
+	[idcouleur]			Long Integer, 
+	[couleur1]			Long Integer, 
+	[couleur2]			Long Integer, 
+	[couleur3]			Long Integer, 
+	[couleur4]			Long Integer, 
+	[couleur5]			Long Integer, 
+	[couleur6]			Long Integer, 
+	[couleur7]			Long Integer, 
+	[couleur8]			Long Integer, 
+	[couleur9]			Long Integer, 
+	[couleur10]			Long Integer
+);
+
+CREATE TABLE [Interets]
+ (
+	[IdInteret]			Long Integer, 
+	[Montant]			Currency, 
+	[DateCreation]			DateTime, 
+	[DateApplication]			DateTime, 
+	[Applique]			Boolean NOT NULL, 
+	[MontantVerse]			Currency, 
+	[AnneeApplication]			Long Integer
+);
+
+CREATE TABLE [MontantDesParts]
+ (
+	[IdMontantPart]			Long Integer, 
+	[Montant]			Currency, 
+	[DatePart]			DateTime
+);
+
+CREATE TABLE [MontantInterets]
+ (
+	[IdMntInterets]			Long Integer, 
+	[IdInterets]			Long Integer, 
+	[MontantVerse]			Currency, 
+	[IdActionnaire]			Long Integer, 
+	[DateVersement]			DateTime, 
+	[IdNumeroPart]			Long Integer, 
+	[InteretsResiduel]			Boolean NOT NULL, 
+	[Rembourse]			Boolean NOT NULL, 
+	[DateRemboursement]			DateTime
+);
+
+CREATE TABLE [NumeroParts]
+ (
+	[IdNumeroPart]			Long Integer, 
+	[NumeroPart]			Long Integer, 
+	[IdMouvement]			Long Integer, 
+	[IdActionnaire]			Long Integer, 
+	[IdPrevNumPart]			Long Integer, 
+	[IdNextNumPart]			Long Integer, 
+	[DateEncaissement]			DateTime, 
+	[DateRemboursement]			DateTime, 
+	[DateCession]			DateTime, 
+	[Sens]			Boolean NOT NULL, 
+	[Termine]			Boolean NOT NULL, 
+	[cede]			Boolean NOT NULL, 
+	[ModeReglement]			Long Integer, 
+	[RefPaiement]			Text (128), 
+	[partEnregistre]			Boolean NOT NULL, 
+	[MntInterets]			Currency
+);
+
+CREATE TABLE [Utilisateurs]
+ (
+	[IdUser]			Long Integer, 
+	[NomUser]			Text (50), 
+	[Passwd]			Text (50), 
+	[ExeWord]			Text (255), 
+	[ExeExcel]			Text (255), 
+	[RecuSouscription]			Text (255), 
+	[RecuRemboursement]			Text (255), 
+	[RecuCession]			Text (255), 
+	[BaseDonnees]			Text (255), 
+	[Couleur]			Long Integer
+);
+
+CREATE TABLE [CorMontantLibelle]
+ (
+	[IdCorMntLibelle]			Long Integer, 
+	[Montant]			Currency, 
+	[Libelle]			Text (255)
+);
+
+CREATE TABLE [Mouvements]
+ (
+	[IdMouvement]			Long Integer, 
+	[IdActionnaire]			Long Integer, 
+	[DateMouvement]			DateTime, 
+	[IdMontantPart]			Long Integer, 
+	[ModeReglement]			Long Integer, 
+	[RefPaiement]			Text (128), 
+	[Observations]			Text (255), 
+	[NbPartsOrigine]			Long Integer, 
+	[NbPartsPlus]			Long Integer, 
+	[NbPartsMoins]			Long Integer, 
+	[ObtenuParCession]			Boolean NOT NULL, 
+	[Enregistre]			Boolean NOT NULL, 
+	[RecuEdite]			Boolean NOT NULL, 
+	[DateDepotCheque]			DateTime, 
+	[IdMvtCession]			Long Integer, 
+	[DateAG]			DateTime, 
+	[IdCodeAG]			Long Integer
+);
+
+CREATE TABLE [CodesAG]
+ (
+	[IdCodeAG]			Long Integer, 
+	[Description]			Text (50), 
+	[Code]			Text (50), 
+	[DateAG]			DateTime, 
+	[Couleur]			Long Integer
+);
+
+
