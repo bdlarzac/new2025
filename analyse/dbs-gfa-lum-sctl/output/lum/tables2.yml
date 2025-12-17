@@ -6,16 +6,16 @@ activite:
   - MontantInterets
   - NumeroParts
   - Mouvements
-  - CodesAG
 
 geo:
 
 config:
   - Civilites
+  - CodesAG
   - Colleges
   - Configuration
+  - CorMontantLibelle
   - CorNbPartLibelle
   - couleurs
   - Interets
   - MontantDesParts
-  - CorMontantLibelle

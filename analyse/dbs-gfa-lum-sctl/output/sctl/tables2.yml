@@ -3,11 +3,7 @@ acteurs:
 
 activite:
   - Fermage
-  - NumGfa
   - Recad
-  - ValeurPointGFA
-  - ValeurPointSCTL
-  - Coef
   - PSG
 
 geo:
@@ -22,6 +18,10 @@ geo:
   - CadValeur
 
 config:
-  - ForPrintSctl
-  - Options
+  - Coef
   - Config
+  - ForPrintSctl
+  - NumGfa
+  - Options
+  - ValeurPointGFA
+  - ValeurPointSCTL
